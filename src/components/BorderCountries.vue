@@ -1,5 +1,9 @@
 <template>
-  <ul v-for="border in borderItems" :key="border.code" class="list-unstyled">
+  <ul
+    v-for="border in sortedCountryNames"
+    :key="border.code"
+    class="list-unstyled"
+  >
     <li>
       <router-link :to="`/countries/${border.code}`">
         {{ border.name }}
@@ -22,6 +26,11 @@ export default {
     borders: {
       type: Array,
       default: [],
+    },
+  },
+  computed: {
+    sortedCountryNames() {
+      return this.borderItems.sort((a, b) => a.name.localeCompare(b.name));
     },
   },
   methods: {
